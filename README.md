@@ -28,11 +28,15 @@ Attributes
 * `node['graphite']['base_dir']` = "/opt/graphite"
 * `node['graphite']['doc_root']` = "/opt/graphite/webapp"
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"
-* `node['graphite']['django_root']` = "@DJANGO_ROOT@" - configurable path to your django installation
 * `node['graphite']['timezone']` - set the timezone for the graphite web interface, defaults to America/Los_Angeles
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
 * `node['graphite']['encrypted_data_bag']['name']` - the name of the encrypted data bag containing the default password for the graphite "root" user. If this attribute is set it will not use `node['graphite']['password']`.
+
+django attributes
+-----------------
+* `node['graphite']['django']['version']` - the version of django to install (default is 1.5.5)
+* `node['graphite']['django']['root']` = "@DJANGO_ROOT@" - configurable path to your django installation
 
 carbon-cache.py attributes
 --------------------------

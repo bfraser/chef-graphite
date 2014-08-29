@@ -76,7 +76,7 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         # must change @DJANGO_ROOT@ to be the path to your django
         # installation, which is probably something like:
         # /usr/lib/python2.6/site-packages/django
-        Alias /media/ "<%= node['graphite']['django_root'] %>/contrib/admin/media/"
+        Alias /media/ "<%= node['graphite']['django']['root'] %>/contrib/admin/media/"
         <Location "/media/">
                 SetHandler None
                 Options All

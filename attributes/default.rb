@@ -16,7 +16,6 @@ default['graphite']['base_dir'] = '/opt/graphite'
 default['graphite']['doc_root'] = '/opt/graphite/webapp'
 default['graphite']['storage_dir'] = '/opt/graphite/storage'
 default['graphite']['timezone'] = 'America/Los_Angeles'
-default['graphite']['django_root'] = '@DJANGO_ROOT@'
 default['graphite']['encrypted_data_bag']['name'] = nil
 default['graphite']['install_type'] = 'package'
 default['graphite']['package_names'] = {
@@ -33,6 +32,10 @@ default['graphite']['package_names'] = {
     'source' => 'https://github.com/graphite-project/graphite-web/zipball/master'
   }
 }
+
+# django
+default['graphite']['django']['version'] = '1.5.5'
+default['graphite']['django']['root'] = '@DJANGO_ROOT@'
 
 #
 # graphite_web
