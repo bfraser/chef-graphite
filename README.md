@@ -111,6 +111,7 @@ graphite-web attributes
 * `node['graphite']['apache']['basic_auth']['file_path']` - location of htpasswd file for basic auth (defaults to node['graphite']['doc_root']/htpasswd)
 * `node['graphite']['apache']['basic_auth']['user']` - username for basic auth
 * `node['graphite']['apache']['basic_auth']['pass']` - password for basic auth
+* `node['graphite']['apache']['module']` - the module used to server Graphite (default is `mod_wsgi`)
 * `node['graphite']['uwsgi_socket']` - the socket to bind uwsgi process to (only needed if using uwsgi)
 
 ### database settings

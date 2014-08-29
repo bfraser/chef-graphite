@@ -32,7 +32,20 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
           <%- end %>
         <%- end %>
 
-        <Location "/">
+        <%- if node['graphite']['apache']['module'] == 'mod_wsgi' %>
+        WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120
+        WSGIProcessGroup graphite
+        WSGIApplicationGroup %{GLOBAL}
+        WSGIImportScript <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi process-group=graphite application-group=%{GLOBAL}
+        WSGIScriptAlias / <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi
+        <%- end %>
+
+        <Directory <%= node['graphite']['base_dir'] %>/conf/>
+
+                Options All
+                AllowOverride All
+                Require all granted
+
                 <%- if node['graphite']['apache']['basic_auth']['enabled'] %>
                 AuthType Basic
                 AuthName "Restricted Area"
@@ -41,32 +54,40 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
                 Require valid-user
                 <%- end %>
 
+                <%- if node['graphite']['apache']['module'] == 'mod_python' %>
                 SetHandler python-program
                 PythonPath "['<%= node['graphite']['doc_root'] %>', '<%= node['graphite']['base_dir'] %>/lib'] + sys.path"
                 PythonHandler django.core.handlers.modpython
                 SetEnv DJANGO_SETTINGS_MODULE graphite.settings
                 PythonDebug Off
                 PythonAutoReload Off
-        </Location>
+                <%- end %>
+        </Directory>
 
+        Alias /content/ /opt/graphite/webapp/content/
         <Location "/content/">
                 SetHandler None
+                Options All
+                AllowOverride All
+                Require all granted
         </Location>
 
+        # NOTE: In order for the django admin site media to work you
+        # must change @DJANGO_ROOT@ to be the path to your django
+        # installation, which is probably something like:
+        # /usr/lib/python2.6/site-packages/django
+        Alias /media/ "<%= node['graphite']['django_root'] %>/contrib/admin/media/"
         <Location "/media/">
                 SetHandler None
+                Options All
+                AllowOverride All
+                Require all granted
         </Location>
 
         <% if node['recipes'].include? "ganglia::web" -%>
-	<Location "/ganglia/">
-	        SetHandler None
-	</Location>
+        <Location "/ganglia/">
+                SetHandler None
+        </Location>
         <% end -%>
-
-	# NOTE: In order for the django admin site media to work you
-	# must change @DJANGO_ROOT@ to be the path to your django
-	# installation, which is probably something like:
-	# /usr/lib/python2.6/site-packages/django
-        Alias /media/ "<%= node['graphite']['django_root'] %>/contrib/admin/media/"
 
 </VirtualHost>

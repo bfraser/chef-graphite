@@ -1,4 +1,9 @@
-include_recipe 'apache2::mod_python'
+case node['graphite']['apache']['module']
+when 'mod_wsgi'
+  include_recipe 'apache2::mod_wsgi'
+when 'mod_python'
+  include_recipe 'apache2::mod_python'
+end
 include_recipe 'apache2::mod_headers'
 include_recipe 'apache2::mod_ssl' if node['graphite']['ssl']['enabled']
 

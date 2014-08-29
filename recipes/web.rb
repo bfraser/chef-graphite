@@ -97,6 +97,12 @@ template "#{basedir}/conf/graphTemplates.conf" do
   notifies :reload, graphite_web_service_resource
 end
 
+template "#{basedir}/conf/graphite.wsgi" do
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
+  source 'graphite.wsgi.erb'
+end
+
 template "#{basedir}/bin/set_admin_passwd.py" do
   source 'set_admin_passwd.py.erb'
   mode 00755

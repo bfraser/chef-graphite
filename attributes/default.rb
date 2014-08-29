@@ -98,3 +98,4 @@ default['graphite']['apache']['basic_auth']['enabled'] = false
 default['graphite']['apache']['basic_auth']['file_path'] = "#{node['graphite']['doc_root']}/htpasswd"
 default['graphite']['apache']['basic_auth']['user'] = nil
 default['graphite']['apache']['basic_auth']['pass'] = nil
+default['graphite']['apache']['module'] = 'mod_wsgi'
