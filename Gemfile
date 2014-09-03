@@ -1,26 +1,21 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 source 'https://rubygems.org'
 
-gem 'rake'
-gem 'librarian-chef'
-gem 'emeril', :group => :release
+gem 'berkshelf'
 
-group :development do
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
-  gem 'guard-rspec'
-end
-
-group :style do
-  gem 'rubocop', '~> 0.18'
-  gem 'foodcritic', '~> 3.0'
-end
+# Uncomment these lines if you want to live on the Edge:
+#
+# group :development do
+#   gem "berkshelf", github: "berkshelf/berkshelf"
+#   gem "vagrant", github: "mitchellh/vagrant", tag: "v1.6.3"
+# end
+#
+# group :plugins do
+#   gem "vagrant-berkshelf", github: "berkshelf/vagrant-berkshelf"
+#   gem "vagrant-omnibus", github: "schisamo/vagrant-omnibus"
+# end
 
 group :test do
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
   gem 'kitchen-docker'
-  gem 'chefspec', '~> 3.2.0'
 end
