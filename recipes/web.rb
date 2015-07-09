@@ -40,7 +40,7 @@ python_pip 'django' do
   version lazy { node['graphite']['django']['version'] }
 end
 
-python_pip 'django-tagging'
+python_pip 'django-tagging' do
   version lazy { node['graphite']['django-tagging']['version'] }
 end
 
