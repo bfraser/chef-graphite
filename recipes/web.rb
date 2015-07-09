@@ -41,6 +41,8 @@ python_pip 'django' do
 end
 
 python_pip 'django-tagging'
+  version lazy { node['graphite']['django-tagging']['version'] }
+end
 
 python_pip 'graphite_web' do
   package_name lazy {

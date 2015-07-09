@@ -37,7 +37,9 @@ default['graphite']['package_names'] = {
 default['graphite']['django']['version'] = '1.5.5'
 default['graphite']['django']['root'] = '@DJANGO_ROOT@'
 
-#
+#django-tagging
+default['graphite']['django-tagging']['version'] = '0.3.1'
+
 # graphite_web
 #
 default['graphite']['web']['debug'] = 'False'
